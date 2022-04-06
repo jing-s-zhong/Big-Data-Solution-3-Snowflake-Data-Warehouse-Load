@@ -32,56 +32,56 @@ USING (
         FROM VALUES 
         (
             'ONTOLOGY.PERSON',
-            'INT.CILENT1_EMAIL_GOWS.PERSON',
-            'INT.CILENT1_EMAIL_GOWS.DIGEST_PERSON',
+            'INT.CILENT1_EMAIL_SALES.PERSON',
+            'INT.CILENT1_EMAIL_SALES.DIGEST_PERSON',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.PERSON',
-            'INT.CILENT2_EMAIL_MSTM.PERSON',
-            'INT.CILENT2_EMAIL_MSTM.DIGEST_PERSON',
+            'INT.CILENT2_EMAIL_TECHS.PERSON',
+            'INT.CILENT2_EMAIL_TECHS.DIGEST_PERSON',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE',
-            'INT.CILENT1_EMAIL_GOWS.MESSAGE',
-            'INT.CILENT1_EMAIL_GOWS.DIGEST_MESSAGE',
+            'INT.CILENT1_EMAIL_SALES.MESSAGE',
+            'INT.CILENT1_EMAIL_SALES.DIGEST_MESSAGE',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE',
-            'INT.CILENT2_EMAIL_MSTM.MESSAGE',
-            'INT.CILENT2_EMAIL_MSTM.DIGEST_MESSAGE',
+            'INT.CILENT2_EMAIL_TECHS.MESSAGE',
+            'INT.CILENT2_EMAIL_TECHS.DIGEST_MESSAGE',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_ADDRESS',
-            'INT.CILENT1_EMAIL_GOWS.EMAIL_ADDRESS',
-            'INT.CILENT1_EMAIL_GOWS.DIGEST_EMAIL_ADDRESS',
+            'INT.CILENT1_EMAIL_SALES.EMAIL_ADDRESS',
+            'INT.CILENT1_EMAIL_SALES.DIGEST_EMAIL_ADDRESS',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_ADDRESS',
-            'INT.CILENT2_EMAIL_MSTM.EMAIL_ADDRESS',
-            'INT.CILENT2_EMAIL_MSTM.DIGEST_EMAIL_ADDRESS',
+            'INT.CILENT2_EMAIL_TECHS.EMAIL_ADDRESS',
+            'INT.CILENT2_EMAIL_TECHS.DIGEST_EMAIL_ADDRESS',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.PERSON_EMAIL_ADDRESS',
-            'INT.CILENT1_EMAIL_GOWS.PERSON_EMAIL',
-            'INT.CILENT1_EMAIL_GOWS.DIGEST_PERSON_EMAIL',
+            'INT.CILENT1_EMAIL_SALES.PERSON_EMAIL',
+            'INT.CILENT1_EMAIL_SALES.DIGEST_PERSON_EMAIL',
             TRUE,
             $${}$$,
             $$
@@ -93,8 +93,8 @@ USING (
                 PE.DATA_KEY,
                 PE.DATA_HASH,
                 PE.LOAD_TIME
-            FROM INT.CILENT1_EMAIL_GOWS.DIGEST_PERSON_EMAIL PE
-            JOIN INT.CILENT1_EMAIL_GOWS.PERSON PI
+            FROM INT.CILENT1_EMAIL_SALES.DIGEST_PERSON_EMAIL PE
+            JOIN INT.CILENT1_EMAIL_SALES.PERSON PI
             ON PE.PERSON_ID = PI.PERSON_ID
             JOIN ONTOLOGY.PERSON P
             ON PI.DATA_KEY = P.DATA_KEY
@@ -104,8 +104,8 @@ USING (
         ),
         (
             'ONTOLOGY.PERSON_EMAIL_ADDRESS',
-            'INT.CILENT2_EMAIL_MSTM.PERSON_EMAIL',
-            'INT.CILENT2_EMAIL_MSTM.DIGEST_PERSON_EMAIL',
+            'INT.CILENT2_EMAIL_TECHS.PERSON_EMAIL',
+            'INT.CILENT2_EMAIL_TECHS.DIGEST_PERSON_EMAIL',
             TRUE,
             $${}$$,
             $$
@@ -117,8 +117,8 @@ USING (
                 PE.DATA_KEY,
                 PE.DATA_HASH,
                 PE.LOAD_TIME
-            FROM INT.CILENT2_EMAIL_MSTM.DIGEST_PERSON_EMAIL PE
-            JOIN INT.CILENT2_EMAIL_MSTM.PERSON PI
+            FROM INT.CILENT2_EMAIL_TECHS.DIGEST_PERSON_EMAIL PE
+            JOIN INT.CILENT2_EMAIL_TECHS.PERSON PI
             ON PE.PERSON_ID = PI.PERSON_ID
             JOIN ONTOLOGY.PERSON P
             ON PI.DATA_KEY = P.DATA_KEY
@@ -128,8 +128,8 @@ USING (
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE_PARTICIPATANT',
-            'INT.CILENT1_EMAIL_GOWS.MESSAGE_EMAIL',
-            'INT.CILENT1_EMAIL_GOWS.DIGEST_MESSAGE_EMAIL',
+            'INT.CILENT1_EMAIL_SALES.MESSAGE_EMAIL',
+            'INT.CILENT1_EMAIL_SALES.DIGEST_MESSAGE_EMAIL',
             TRUE,
             $${}$$,
             $$
@@ -143,8 +143,8 @@ USING (
                 ME.DATA_KEY,
                 ME.DATA_HASH,
                 ME.LOAD_TIME
-            FROM INT.CILENT1_EMAIL_GOWS.DIGEST_MESSAGE_EMAIL ME
-            JOIN INT.CILENT1_EMAIL_GOWS.MESSAGE MI
+            FROM INT.CILENT1_EMAIL_SALES.DIGEST_MESSAGE_EMAIL ME
+            JOIN INT.CILENT1_EMAIL_SALES.MESSAGE MI
             ON ME.MESSAGE_ID = MI.MESSAGE_ID
             JOIN ONTOLOGY.EMAIL_MESSAGE M
             ON MI.DATA_KEY = M.DATA_KEY AND M.VALID_TO IS NULL
@@ -156,8 +156,8 @@ USING (
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE_PARTICIPATANT',
-            'INT.CILENT2_EMAIL_MSTM.MESSAGE_EMAIL',
-            'INT.CILENT2_EMAIL_MSTM.DIGEST_MESSAGE_EMAIL',
+            'INT.CILENT2_EMAIL_TECHS.MESSAGE_EMAIL',
+            'INT.CILENT2_EMAIL_TECHS.DIGEST_MESSAGE_EMAIL',
             TRUE,
             $${}$$,
             $$
@@ -171,8 +171,8 @@ USING (
                 ME.DATA_KEY,
                 ME.DATA_HASH,
                 ME.LOAD_TIME
-            FROM INT.CILENT2_EMAIL_MSTM.DIGEST_MESSAGE_EMAIL ME
-            JOIN INT.CILENT2_EMAIL_MSTM.MESSAGE MI
+            FROM INT.CILENT2_EMAIL_TECHS.DIGEST_MESSAGE_EMAIL ME
+            JOIN INT.CILENT2_EMAIL_TECHS.MESSAGE MI
             ON ME.MESSAGE_ID = MI.MESSAGE_ID
             JOIN ONTOLOGY.EMAIL_MESSAGE M
             ON MI.DATA_KEY = M.DATA_KEY AND M.VALID_TO IS NULL

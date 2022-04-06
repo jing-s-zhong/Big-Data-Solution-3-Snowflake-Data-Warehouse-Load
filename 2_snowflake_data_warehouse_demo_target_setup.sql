@@ -25,6 +25,7 @@ CREATE OR REPLACE TABLE HISTORY.PERSON (
 	VIEWABLE BOOLEAN DEFAULT TRUE,
 	SCORE FLOAT, 
     PLATFORM_ID NUMBER,
+    ORGANIZATION_ID NUMBER,
 	DATA_KEY TEXT, 
 	DATA_HASH TEXT, 
     LOAD_TIME TIMESTAMP_NTZ,
@@ -45,6 +46,7 @@ CREATE OR REPLACE TABLE ONTOLOGY.PERSON (
 	VIEWABLE BOOLEAN DEFAULT TRUE,
 	SCORE FLOAT, 
     PLATFORM_ID NUMBER,
+    ORGANIZATION_ID NUMBER,
 	DATA_KEY TEXT, 
 	DATA_HASH TEXT, 
     LOAD_TIME TIMESTAMP_NTZ,
@@ -247,6 +249,14 @@ USING (
                 "FIELD_FOR_KEY": true,
                 "FIELD_FOR_XREF": true,
                 "FIELD_NAME": "PLATFORM_ID",
+                "FIELD_TRANS": "",
+                "FIELD_TYPE": "NUMBER"
+            },
+            {
+                "FIELD_FOR_HASH": false,
+                "FIELD_FOR_KEY": false,
+                "FIELD_FOR_XREF": true,
+                "FIELD_NAME": "ORGANIZATION_ID",
                 "FIELD_TRANS": "",
                 "FIELD_TYPE": "NUMBER"
             },
