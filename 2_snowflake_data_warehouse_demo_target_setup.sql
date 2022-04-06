@@ -97,7 +97,7 @@ CREATE OR REPLACE TABLE ONTOLOGY.PERSON_EMAIL_ADDRESS (
 	PERSON_EMAIL_ADDRESS_ID NUMBER IDENTITY, 
 	PERSON_ID NUMBER, 
 	EMAIL_ADDRESS_ID NUMBER, 
-	COMPANY_ID NUMBER, 
+	ORGANIZATION_ID NUMBER, 
 	PRIMARY_EMAIL BOOLEAN, 
     PLATFORM_ID NUMBER,
 	DATA_KEY TEXT, 
@@ -538,7 +538,7 @@ USING (
                 "FIELD_FOR_HASH": true,
                 "FIELD_FOR_KEY": true,
                 "FIELD_FOR_XREF": true,
-                "FIELD_NAME": "COMPANY_ID",
+                "FIELD_NAME": "ORGANIZATION_ID",
                 "FIELD_TRANS": "NULL",
                 "FIELD_TYPE": "NUMBER"
             },
@@ -848,19 +848,13 @@ WHEN NOT MATCHED THEN
 
 
 
-/********************************************************************
- ** Data Warehouse Load Source Configuration 
- ********************************************************************/
-
-
-
-
  /********************************************************************
  ** Schema Update Manually
  ********************************************************************/
 USE SCHEMA HST._METADATA;
-
+/*
 CALL CTRL_TASK_SCHEDULER('NODE', 'DEBUG');
 CALL CTRL_TASK_SCHEDULER('NODE', 'WORK');
 CALL CTRL_TASK_SCHEDULER('EDGE', 'DEBUG');
 CALL CTRL_TASK_SCHEDULER('EDGE', 'WORK');
+*/

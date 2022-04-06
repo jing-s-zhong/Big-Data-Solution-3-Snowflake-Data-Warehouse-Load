@@ -32,69 +32,69 @@ USING (
         FROM VALUES 
         (
             'ONTOLOGY.PERSON',
-            'INT.IH_EMAIL_GOWS.PERSON',
-            'INT.IH_EMAIL_GOWS.DIGEST_PERSON',
+            'INT.CILENT1_EMAIL_GOWS.PERSON',
+            'INT.CILENT1_EMAIL_GOWS.DIGEST_PERSON',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.PERSON',
-            'INT.SFDC_EMAIL_MSTM.PERSON',
-            'INT.SFDC_EMAIL_MSTM.DIGEST_PERSON',
+            'INT.CILENT2_EMAIL_MSTM.PERSON',
+            'INT.CILENT2_EMAIL_MSTM.DIGEST_PERSON',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE',
-            'INT.IH_EMAIL_GOWS.MESSAGE',
-            'INT.IH_EMAIL_GOWS.DIGEST_MESSAGE',
+            'INT.CILENT1_EMAIL_GOWS.MESSAGE',
+            'INT.CILENT1_EMAIL_GOWS.DIGEST_MESSAGE',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE',
-            'INT.SFDC_EMAIL_MSTM.MESSAGE',
-            'INT.SFDC_EMAIL_MSTM.DIGEST_MESSAGE',
+            'INT.CILENT2_EMAIL_MSTM.MESSAGE',
+            'INT.CILENT2_EMAIL_MSTM.DIGEST_MESSAGE',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_ADDRESS',
-            'INT.IH_EMAIL_GOWS.EMAIL_ADDRESS',
-            'INT.IH_EMAIL_GOWS.DIGEST_EMAIL_ADDRESS',
+            'INT.CILENT1_EMAIL_GOWS.EMAIL_ADDRESS',
+            'INT.CILENT1_EMAIL_GOWS.DIGEST_EMAIL_ADDRESS',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.EMAIL_ADDRESS',
-            'INT.SFDC_EMAIL_MSTM.EMAIL_ADDRESS',
-            'INT.SFDC_EMAIL_MSTM.DIGEST_EMAIL_ADDRESS',
+            'INT.CILENT2_EMAIL_MSTM.EMAIL_ADDRESS',
+            'INT.CILENT2_EMAIL_MSTM.DIGEST_EMAIL_ADDRESS',
             TRUE,
             $${}$$,
             NULL
         ),
         (
             'ONTOLOGY.PERSON_EMAIL_ADDRESS',
-            'INT.IH_EMAIL_GOWS.PERSON_EMAIL',
-            'INT.IH_EMAIL_GOWS.DIGEST_PERSON_EMAIL',
+            'INT.CILENT1_EMAIL_GOWS.PERSON_EMAIL',
+            'INT.CILENT1_EMAIL_GOWS.DIGEST_PERSON_EMAIL',
             TRUE,
             $${}$$,
             $$
             SELECT P.PERSON_ID,
                 E.EMAIL_ADDRESS_ID,
-                PI.COMPANY_ID,
+                PI.ORGANIZATION_ID,
                 E.DISPLAY_NAME[0] /*EMAIL_ADDRESS*/ = P.FULL_NAME PRIMARY_EMAIL,
                 PE.PLATFORM_ID,
                 PE.DATA_KEY,
                 PE.DATA_HASH,
                 PE.LOAD_TIME
-            FROM INT.IH_EMAIL_GOWS.DIGEST_PERSON_EMAIL PE
-            JOIN INT.IH_EMAIL_GOWS.PERSON PI
+            FROM INT.CILENT1_EMAIL_GOWS.DIGEST_PERSON_EMAIL PE
+            JOIN INT.CILENT1_EMAIL_GOWS.PERSON PI
             ON PE.PERSON_ID = PI.PERSON_ID
             JOIN ONTOLOGY.PERSON P
             ON PI.DATA_KEY = P.DATA_KEY
@@ -104,21 +104,21 @@ USING (
         ),
         (
             'ONTOLOGY.PERSON_EMAIL_ADDRESS',
-            'INT.SFDC_EMAIL_MSTM.PERSON_EMAIL',
-            'INT.SFDC_EMAIL_MSTM.DIGEST_PERSON_EMAIL',
+            'INT.CILENT2_EMAIL_MSTM.PERSON_EMAIL',
+            'INT.CILENT2_EMAIL_MSTM.DIGEST_PERSON_EMAIL',
             TRUE,
             $${}$$,
             $$
             SELECT P.PERSON_ID,
                 E.EMAIL_ADDRESS_ID,
-                PI.COMPANY_ID,
+                PI.ORGANIZATION_ID,
                 E.DISPLAY_NAME[0] /*EMAIL_ADDRESS*/ = P.FULL_NAME PRIMARY_EMAIL,
                 PE.PLATFORM_ID,
                 PE.DATA_KEY,
                 PE.DATA_HASH,
                 PE.LOAD_TIME
-            FROM INT.SFDC_EMAIL_MSTM.DIGEST_PERSON_EMAIL PE
-            JOIN INT.SFDC_EMAIL_MSTM.PERSON PI
+            FROM INT.CILENT2_EMAIL_MSTM.DIGEST_PERSON_EMAIL PE
+            JOIN INT.CILENT2_EMAIL_MSTM.PERSON PI
             ON PE.PERSON_ID = PI.PERSON_ID
             JOIN ONTOLOGY.PERSON P
             ON PI.DATA_KEY = P.DATA_KEY
@@ -128,8 +128,8 @@ USING (
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE_PARTICIPATANT',
-            'INT.IH_EMAIL_GOWS.MESSAGE_EMAIL',
-            'INT.IH_EMAIL_GOWS.DIGEST_MESSAGE_EMAIL',
+            'INT.CILENT1_EMAIL_GOWS.MESSAGE_EMAIL',
+            'INT.CILENT1_EMAIL_GOWS.DIGEST_MESSAGE_EMAIL',
             TRUE,
             $${}$$,
             $$
@@ -143,8 +143,8 @@ USING (
                 ME.DATA_KEY,
                 ME.DATA_HASH,
                 ME.LOAD_TIME
-            FROM INT.IH_EMAIL_GOWS.DIGEST_MESSAGE_EMAIL ME
-            JOIN INT.IH_EMAIL_GOWS.MESSAGE MI
+            FROM INT.CILENT1_EMAIL_GOWS.DIGEST_MESSAGE_EMAIL ME
+            JOIN INT.CILENT1_EMAIL_GOWS.MESSAGE MI
             ON ME.MESSAGE_ID = MI.MESSAGE_ID
             JOIN ONTOLOGY.EMAIL_MESSAGE M
             ON MI.DATA_KEY = M.DATA_KEY AND M.VALID_TO IS NULL
@@ -156,8 +156,8 @@ USING (
         ),
         (
             'ONTOLOGY.EMAIL_MESSAGE_PARTICIPATANT',
-            'INT.SFDC_EMAIL_MSTM.MESSAGE_EMAIL',
-            'INT.SFDC_EMAIL_MSTM.DIGEST_MESSAGE_EMAIL',
+            'INT.CILENT2_EMAIL_MSTM.MESSAGE_EMAIL',
+            'INT.CILENT2_EMAIL_MSTM.DIGEST_MESSAGE_EMAIL',
             TRUE,
             $${}$$,
             $$
@@ -171,8 +171,8 @@ USING (
                 ME.DATA_KEY,
                 ME.DATA_HASH,
                 ME.LOAD_TIME
-            FROM INT.SFDC_EMAIL_MSTM.DIGEST_MESSAGE_EMAIL ME
-            JOIN INT.SFDC_EMAIL_MSTM.MESSAGE MI
+            FROM INT.CILENT2_EMAIL_MSTM.DIGEST_MESSAGE_EMAIL ME
+            JOIN INT.CILENT2_EMAIL_MSTM.MESSAGE MI
             ON ME.MESSAGE_ID = MI.MESSAGE_ID
             JOIN ONTOLOGY.EMAIL_MESSAGE M
             ON MI.DATA_KEY = M.DATA_KEY AND M.VALID_TO IS NULL
@@ -243,15 +243,8 @@ WHEN NOT MATCHED THEN
 
 
 
-/********************************************************************
- ** Data Warehouse Load Source Configuration 
- ********************************************************************/
-
-
-
-
  /********************************************************************
- ** Schema Update Manually
+ ** Schedule The Data Warehouse Load Manually
  ********************************************************************/
 USE SCHEMA HST._METADATA;
 
