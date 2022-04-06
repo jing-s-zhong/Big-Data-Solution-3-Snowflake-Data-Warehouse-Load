@@ -2,6 +2,9 @@
 -- default database should be HST or HSTORY
 USE DATABASE HST;
 
+/********************************************************************
+ ** Data warehouse Schema Create Section
+ ********************************************************************/
 --
 -- Create DW tables
 --
@@ -109,8 +112,10 @@ DROP TABLE IF EXISTS ONTOLOGY.EMAIL_MESSAGE_PARTICIPATANT;
 CREATE OR REPLACE TABLE ONTOLOGY.EMAIL_MESSAGE_PARTICIPATANT (
 	EMAIL_MESSAGE_PARTICIPATION_ID NUMBER IDENTITY,
 	MESSAGE_ID NUMBER, 
-	EMAIL_ADDRESS_ID NUMBER, 
-	DISPLAY_NAME VARCHAR, 
+	SENDER_EMAIL_ADDRESS_ID NUMBER, 
+	SENDER_DISPLAY_NAME VARCHAR, 
+	RECIPIENT_EMAIL_ADDRESS_ID NUMBER, 
+	RECIPIENT_DISPLAY_NAME VARCHAR, 
     PARTICIPATION_TYPE VARCHAR,
     PLATFORM_ID NUMBER,
 	DATA_KEY TEXT, 
@@ -142,6 +147,9 @@ CREATE OR REPLACE TABLE ONTOLOGY.PERSON_CONTACT (
     VALID_TO DATE
 );
 
+/********************************************************************
+ ** Data Warehouse Load Target Configuration 
+ ********************************************************************/
 --
 -- Create warehouse target config data
 --
@@ -182,7 +190,7 @@ USING (
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
                 "FIELD_NAME": "PERSON_ID",
-                "FIELD_TRANS": "",
+                "FIELD_TRANS": "IDENTITY",
                 "FIELD_TYPE": "NUMBER"
             },
             {
@@ -290,7 +298,7 @@ USING (
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
                 "FIELD_NAME": "MESSAGE_ID",
-                "FIELD_TRANS": "",
+                "FIELD_TRANS": "IDENTITY",
                 "FIELD_TYPE": "NUMBER"
             },
             {
@@ -430,7 +438,7 @@ USING (
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
                 "FIELD_NAME": "EMAIL_ADDRESS_ID",
-                "FIELD_TRANS": "",
+                "FIELD_TRANS": "IDENTITY",
                 "FIELD_TYPE": "NUMBER"
             },
             {
@@ -506,7 +514,7 @@ USING (
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
                 "FIELD_NAME": "PERSON_EMAIL_ADDRESS_ID",
-                "FIELD_TRANS": "",
+                "FIELD_TRANS": "IDENTITY",
                 "FIELD_TYPE": "NUMBER"
             },
             {
@@ -598,7 +606,7 @@ USING (
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
                 "FIELD_NAME": "EMAIL_MESSAGE_PARTICIPATION_ID",
-                "FIELD_TRANS": "",
+                "FIELD_TRANS": "IDENTITY",
                 "FIELD_TYPE": "NUMBER"
             },
             {
@@ -613,7 +621,7 @@ USING (
                 "FIELD_FOR_HASH": false,
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
-                "FIELD_NAME": "EMAIL_ADDRESS_ID",
+                "FIELD_NAME": "SENDER_EMAIL_ADDRESS_ID",
                 "FIELD_TRANS": "",
                 "FIELD_TYPE": "NUMBER"
             },
@@ -621,7 +629,23 @@ USING (
                 "FIELD_FOR_HASH": true,
                 "FIELD_FOR_KEY": true,
                 "FIELD_FOR_XREF": true,
-                "FIELD_NAME": "DISPLAY_NAME",
+                "FIELD_NAME": "SENDER_DISPLAY_NAME",
+                "FIELD_TRANS": "",
+                "FIELD_TYPE": "VARIANT"
+            },
+            {
+                "FIELD_FOR_HASH": false,
+                "FIELD_FOR_KEY": false,
+                "FIELD_FOR_XREF": false,
+                "FIELD_NAME": "RECIPIENT_EMAIL_ADDRESS_ID",
+                "FIELD_TRANS": "",
+                "FIELD_TYPE": "NUMBER"
+            },
+            {
+                "FIELD_FOR_HASH": true,
+                "FIELD_FOR_KEY": true,
+                "FIELD_FOR_XREF": true,
+                "FIELD_NAME": "RECIPIENT_DISPLAY_NAME",
                 "FIELD_TRANS": "",
                 "FIELD_TYPE": "VARIANT"
             },
@@ -690,7 +714,7 @@ USING (
                 "FIELD_FOR_KEY": false,
                 "FIELD_FOR_XREF": false,
                 "FIELD_NAME": "PERSON_CONTACT_ID",
-                "FIELD_TRANS": "",
+                "FIELD_TRANS": "IDENTITY",
                 "FIELD_TYPE": "NUMBER"
             },
             {
@@ -820,3 +844,22 @@ WHEN NOT MATCHED THEN
         S.DATA_FIELD, 
         S.META_FIELD 
     );
+
+
+
+/********************************************************************
+ ** Data Warehouse Load Source Configuration 
+ ********************************************************************/
+
+
+
+
+ /********************************************************************
+ ** Schema Update Manually
+ ********************************************************************/
+USE SCHEMA HST._METADATA;
+
+CALL CTRL_TASK_SCHEDULER('NODE', 'DEBUG');
+CALL CTRL_TASK_SCHEDULER('NODE', 'WORK');
+CALL CTRL_TASK_SCHEDULER('EDGE', 'DEBUG');
+CALL CTRL_TASK_SCHEDULER('EDGE', 'WORK');

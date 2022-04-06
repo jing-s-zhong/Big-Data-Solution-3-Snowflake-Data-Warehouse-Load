@@ -1,5 +1,6 @@
 -- 
 -- default database should be HST or HSTORY
+--
 USE DATABASE HST;
 
 DROP SCHEMA IF EXISTS _METADATA;
@@ -97,8 +98,8 @@ USING (
     WITH SOURCE_TRANSED AS (
         SELECT {{SOURCE_SELECT_LIST}}
         FROM {{SOURCE_DATA}}
-        WHERE DIGEST != ''DELETE'' /* TODO: Teak digest view and transformation query to enable "DELETE" action */
-        )
+        --WHERE DIGEST != ''DELETE'' /* TODO: Teak digest view and transformation query to enable "DELETE" action */
+    )
     SELECT {{DATA_SELECT_LIST}}
     FROM SOURCE_TRANSED
 ) S 
@@ -213,7 +214,7 @@ JINJA_EXPPRESSION AS ( /* Status Conditions */
         SELECT T.TARGET_ID,
             T.TARGET_DATA,
             T.PROCESS_PRIORITY,
-            IFF(IFNULL(S.TRANSFORMATION, '') = '', S.SOURCE_DATA, CONCAT ('(\n\t\t/* transformation begin */', S.TRANSFORMATION, '/* transformation end */\n\t\t)')) SOURCE_DATA,
+            IFF(IFNULL(S.TRANSFORMATION, '') = '', S.SOURCE_DATA, CONCAT ('(\n\t\t\t/* transformation begin */', S.TRANSFORMATION, '/* transformation end */\n\t\t)')) SOURCE_DATA,
             CTRL_FIELD,
             ARRAY_SIZE(T.DATA_FIELD) SOURCE_SIZE,
             VALUE:FIELD_NAME::VARCHAR TARGET_FIELD,
@@ -226,6 +227,7 @@ JINJA_EXPPRESSION AS ( /* Status Conditions */
         JOIN CTRL_SOURCE S
         ON T.TARGET_ID = S.TARGET_ID, 
         LATERAL FLATTEN ( INPUT => ARRAY_CAT(T.DATA_FIELD, T.META_FIELD) )
+        WHERE UPPER(VALUE:FIELD_TRANS::VARCHAR) NOT IN ('IDENTITY', 'AUTOINCREMENT')
     )
     GROUP BY 1,2,3,4,5,6,7,8
 )
