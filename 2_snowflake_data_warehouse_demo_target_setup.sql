@@ -1,9 +1,10 @@
 -- 
 -- default database should be HST or HSTORY
+--
 USE DATABASE HST;
 
 /********************************************************************
- ** Data warehouse Schema Create Section
+ ** Data warehouse Schema Create Section (Inmon Model)
  ********************************************************************/
 --
 -- Create DW tables

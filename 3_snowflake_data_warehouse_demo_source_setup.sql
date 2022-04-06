@@ -1,5 +1,6 @@
 -- 
 -- default database should be HST or HSTORY
+--
 USE DATABASE HST;
 
 /********************************************************************
