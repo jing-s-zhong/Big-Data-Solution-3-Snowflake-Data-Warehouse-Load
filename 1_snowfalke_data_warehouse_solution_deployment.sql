@@ -3,6 +3,9 @@
 --
 USE DATABASE HST;
 
+/********************************************************************
+ ** Data Warehouse Solution Deployment Section
+ ********************************************************************/
 DROP SCHEMA IF EXISTS _METADATA;
 CREATE SCHEMA IF NOT EXISTS _METADATA;
 USE SCHEMA _METADATA;
@@ -325,6 +328,11 @@ CALL CTRL_TASK_SCHEDULER('NODE', 'WORK');
 CALL CTRL_TASK_SCHEDULER('EDGE', 'DEBUG');
 CALL CTRL_TASK_SCHEDULER('EDGE', 'WORK');
 */
+
+
+/********************************************************************
+ ** Data Warehouse Solution Automation Setup
+ ********************************************************************/
 /*
 --
 -- create a snow job to schedule the loader
