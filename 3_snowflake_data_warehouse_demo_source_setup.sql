@@ -244,8 +244,8 @@ WHEN NOT MATCHED THEN
 
 
  /********************************************************************
- ** Schedule The Data Warehouse Load Manually
- ********************************************************************/
+  ** Schedule The Data Warehouse Load Manually
+  ********************************************************************/
 USE SCHEMA HST._METADATA;
 
 CALL CTRL_TASK_SCHEDULER('NODE', 'DEBUG');
